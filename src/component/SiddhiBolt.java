@@ -22,6 +22,7 @@ public class SiddhiBolt extends BaseBasicBolt {
 	private String[] definitions;
 
 	//Queries to be executed using Siddhi
+	private String[] queries;
 	
 	/**
 	 * Bolt which runs teh siddhi Engine
@@ -33,9 +34,20 @@ public class SiddhiBolt extends BaseBasicBolt {
 	
 	 public SiddhiBolt(String[] definitions, String[] queries, String[] exportedSiddhiStreamIds)
 	 {
+		 this.definitions = definitions;
+		 this.queries = queries;
+		 this.exportedStreamIds = exportedSiddhiStreamIds;
+		 init();
 		 
 	 }
 	 
+	private void init() {
+		// TODO Auto-generated method stub
+		 siddhimanager = new SiddhiManager(new SiddhiConfiguration());
+	     log = Logger.getLogger(SiddhiBolt.class);
+		
+	}
+
 	@Override
 	public void execute(Tuple arg0, BasicOutputCollector arg1) {
 		// TODO Auto-generated method stub
